@@ -11,6 +11,10 @@ var Article = connection.define('article', {
     body:  {
         Sequelize.TEXT,
         defaultValue: 'Coming soon...'
+    },
+    {   // Aditional options for the model
+        timestamps: false
+        // , freezeTableName: true // Prevents table name to be pluralized ig. Article -> Articles
     }
 });
 
