@@ -9,31 +9,29 @@ var Article = connection.define('article', {
     },
     title: {
         type: Sequelize.STRING,
-        unique: true,
-        validate: {
-            len: {
-                args: [5, 150],
-                msg: 'Please enter a title between 5 and 150 characters.'
-            }
-        }
+        unique: true
     },
     body: {
         type: Sequelize.TEXT,
-        validate: {
-            startsWithUpper: function(bodyVal) {
-                // Validates if first character is uppercase
-                var first = bodyVal.charAt(0);
-                var startsWithUpper = first === first.toUpperCase();
-                if(!startsWithUpper) {
-                    throw new Error('First letter must be uppercased');
-                }
-            }
-        }
-        // defaultValue: 'Coming soon...'
     }
 }, {
-    timestamps: false // Aditional options for the model
-        // , freezeTableName: true // Prevents table name to be pluralized ig. Article -> Articles
+    hooks: {
+        beforeValidate: function() {
+            console.log('beforeValidate');
+
+        },
+        afterValidate: function() {
+            console.log('afterValidate');
+
+        },
+        beforeCreate: function() {
+            console.log('beforeCreate');
+
+        },
+        afterCreate: function() {
+            console.log('afterCreate');
+        }
+    }
 });
 
 connection.sync({
@@ -41,9 +39,9 @@ connection.sync({
     logging: console.log
 }).then(function() {
     return Article.create({
-        title: 'Testando',
-        slug: 'wibble',
-        body: 'Zoofoobar'
+        title: 'Zoo',
+        slug: 'Foo',
+        body: 'Bar'
     });
 }).catch(function(error) {
     console.log(error);
