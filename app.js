@@ -3,6 +3,10 @@ var Sequelize = require('sequelize');
 var connection = new Sequelize('articles', 'root', 'root');
 
 var Article = connection.define('article', {
+        slug: {
+            type:       Sequelize.STRING,
+            primaryKey: true
+        },
         title: {
             type:      Sequelize.STRING,
             unique:    true,
