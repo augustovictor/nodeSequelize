@@ -12,7 +12,10 @@ var Article = connection.define('article', {
         unique: true,
         allowNull: false,
         validate: {
-            len: [5, 150]
+            len: {
+                args: [5, 150],
+                msg: 'Please enter a title between 5 and 150 characters.'
+            }
         }
     },
     body: {
