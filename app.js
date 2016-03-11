@@ -28,8 +28,8 @@ var Article = connection.define('article', {
             console.log('beforeCreate');
 
         },
-        afterCreate: function() {
-            console.log('afterCreate');
+        afterCreate: function(res) {
+            console.log('afterCreate: Created article with slug: ' + res.dataValues.slug);
         }
     }
 });
